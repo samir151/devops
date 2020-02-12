@@ -1,0 +1,104 @@
+docker file examples
+====================
+create a docker file setting up ci-cd environment.
+where jenkins container should be linked with two tomcat container
+----------------------------------------------------------------
+
+vim docker-compose.yml
+---
+version: '3'
+services:
+  devserver:
+    image: jenkins
+    ports:
+      - '5050:8080'
+  qaserver:
+    image: tomcat
+    ports:
+      - '4040:8080'
+    links:
+      - devserver:jenkins
+  prodserver:
+    image: tomcat
+    ports:
+      - '3030:8080'
+    links:
+      - devserver:jenkins
+...
+
+:wq
+docker-compose up -d
+~
+===============================================================
+create a docker-compose file for implemeting the lamp archetucher where mysql linked with httpd with php container 
+
+vim docker-compose.yml
+
+
+---
+version: '3'
+services:
+  mydb:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: intelqit
+  apache:
+    image: httpd
+    ports:
+      - '6060:80'
+    links:
+      - mydb:mysql
+  php:
+    image: php:7.1-apache
+    links:
+      - mydb:mysql
+      - apache:httpd
+...
+=================================================================
+
+create a docker compose file for setting up teting envronment.
+where selenium hub continers should be linked with two container 
+1.chrome
+2.firefox
+
+vim docker-compose.yml
+
+---
+version: '3'
+services:
+  hub:
+    image: selenium/hub
+    ports:
+      - '4040:4444'
+  chrome:
+    image: selenium/node-chrome-debug
+    ports:
+      - '5901:5900'
+    links:
+      - hub:seleinum
+  firefox:
+    image: selenium/node-firefox-debug
+    ports:
+      - '5902:5900'
+    links:
+      - hub:selenium
+...
+=================================================================
+docker installation command
+-------------------------
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,61 @@
+                  jenkins
+
+-----------------------------------------------
+
+
+setting up qaserver 
+-------------
+1.update apt repository
+
+sudo apt-get update
+
+3.install java jdk1.8
+
+sudo apt-get install -y openjdk-8-jdk
+
+4. install git and maven
+
+ sudo apt-get install -y git maven
+
+
+5.download jenkins file
+
+wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+
+6. start jenkins
+
+java -jar jenkins.war
+
+
+------------------------------------
+setting up qaserver
+------------------------------------------------------
+
+sudo apt-get update
+
+
+sudo apt-get install -y tomcat8
+
+sudo apt-get install -y tomcat8-admin
+
+cd /etc/tomcat8
+
+ls
+
+tomcat-users.xml
+
+
+sudo vim tomcat-users.xml
+
+<users username="intelqit" password="intelqit" roles="manager-script"/>
+
+sudo service tomcat8 restart
+
+
+
+
+
+
+
+
+
